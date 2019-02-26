@@ -103,8 +103,10 @@ source 点击 master branch
 
 
 #### 5.提交jekyll主题到github
+<br/><br/>
+git连接远程仓库在这里不再描述可点击连接学习
 <br/>
-git连接远程仓库在这里不再描述可点击连接学习[关连远程仓库](https://www.cnblogs.com/flora5/p/7152556.html)
+[<font color="red">点击学习git关连远程仓库</font>](https://www.cnblogs.com/flora5/p/7152556.html)
 <br/>
 
 <br/>
