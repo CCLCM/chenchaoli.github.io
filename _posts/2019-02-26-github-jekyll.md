@@ -68,6 +68,8 @@ source 点击 master branch
 <br/>
 <br/>
 点击 Singed in as XXX
+<br/>
+<br/>
 ![site published]({{ '/styles/images/github_jekyll/7.jpg' | prepend: site.baseurl  }})
 <br/>
 <br/>
