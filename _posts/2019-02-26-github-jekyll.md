@@ -9,8 +9,6 @@ tag: github+jekyll
 * content
 {:toc}
 
-
-博客搭建		{#chenchaoli}
 ------------------------
 #### 1.注册 gitbug
 
