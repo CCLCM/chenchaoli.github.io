@@ -6,10 +6,10 @@ url: https://cclcm.github.io/chenchaoli.github.io/
 resume_site: https://cclcm.github.io/chenchaoli.github.io/
 github: https://github.com/CCLCM
 baseurl: "/chenchaoli.github.io"
-description: 实际上, 少就是多!
+description: 人生苦短,活学多用!
 meta_description: 生命不止;折腾不休
-motto: 坚持不懈,任重而道远
-banner: 坚持不懈,任重而道远。
+motto: "工作,生活,看世界"
+banner: "思考更多才能创造更大的价值"
 
 #permalink: /:categories/:year/:month/:day/:title/
 permalink: /:year/:month/:day/:title/
