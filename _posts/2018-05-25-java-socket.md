@@ -17,17 +17,15 @@ tag: Java 网络编程
 java 中ip对象：InetAddress.
 
 ```Java
-
 import java.net.*;
 class  IPDemo{
 	public static void main(String[] args) throws UnknownHostException{
-		//通过名称(ip字符串or主机名)来获取一个ip对象。
-		InetAddress ip = InetAddress.getByName("www.baidu.com");//java.net.UnknownHostException
-		System.out.println("addr:"+ip.getHostAddress());
-		System.out.println("name:"+ip.getHostName());
-	}
+	//通过名称(ip字符串or主机名)来获取一个ip对象。
+	InetAddress ip =InetAddress.getByName("www.baidu.com");/java.net.UnknownHostException
+	System.out.println("addr:"+ip.getHostAddress());
+	System.out.println("name:"+ip.getHostName());
+ }
 }
-
 ```
 
 
@@ -43,9 +41,7 @@ UDP传输：
 因为数据包中包含的信息较多，为了操作这些信息方便，也一样会将其封装成对象。这个数据包对象就是：DatagramPacket.通过这个对象中的方法，就可以获取到数据包中的各种信息。
 
 
-
 DatagramSocket具备发送和接受功能，在进行udp传输时，需要明确一个是发送端，一个是接收端。
-
 
 
 udp的发送端：
@@ -56,24 +52,23 @@ udp的发送端：
 5，关闭资源。
 
 
-
 ```Java
 import java.net.*;
 class  UdpSend{
-	public static void main(String[] args)throws Exception {
-//		1，建立udp的socket服务。
-		DatagramSocket ds = new DatagramSocket(8888);//指定发送端口，不指定系统会随机分配。
-//		2，明确要发送的具体数据。
-		String text = "udp传输演示 哥们来了";
-		byte[] buf = text.getBytes();
-//		3，将数据封装成了数据包。
-		DatagramPacket dp = new DatagramPacket(buf,
-buf.length,InetAddress.getByName("10.1.31.127"),10000);
-//		4，用socket服务的send方法将数据包发送出去。
-		ds.send(dp);
-//		5，关闭资源。
-		ds.close();
-	}
+   public static void main(String[] args)throws Exception {
+//   1，建立udp的socket服务。
+     DatagramSocket ds = new DatagramSocket(8888);//指定发送端口，不指定系统会随机分配。
+//   2，明确要发送的具体数据。
+     String text = "udp传输演示 哥们来了";
+     byte[] buf = text.getBytes();
+//   3，将数据封装成了数据包。
+     DatagramPacket dp = new DatagramPacket(buf,
+     buf.length,InetAddress.getByName("10.1.31.127"),10000);
+//   4，用socket服务的send方法将数据包发送出去。
+     ds.send(dp);
+//   5，关闭资源。
+     ds.close();
+ }
 }
 ```
 
@@ -90,22 +85,22 @@ udp的接收端：
 ```Java
 
 class UdpRece {
-	public static void main(String[] args) throws Exception{
-//		1，创建udp的socket服务。
-		DatagramSocket ds = new DatagramSocket(10000);
-//		2，定义数据包，用于存储接收到数据。先定义字节数组，数据包会把数据存储到字节数组中。
-		byte[] buf = new byte[1024];
-		DatagramPacket dp = new DatagramPacket(buf,buf.length);
-//		3，通过socket服务的接收方法将收到的数据存储到数据包中。
-		ds.receive(dp);//该方法是阻塞式方法。
-//		4，通过数据包的方法获取数据包中的具体数据内容，比如ip，端口，数据等等。
-		String ip = dp.getAddress().getHostAddress();
-		int port = dp.getPort();
-		String text = new String(dp.getData(),0,dp.getLength());//将字节数组中的有效部分转成字符串。
-		System.out.println(ip+":"+port+"--"+text);
-//		5，关闭资源。
-		ds.close();
-	}
+  public static void main(String[] args) throws Exception{
+//   1，创建udp的socket服务。
+     DatagramSocket ds = new DatagramSocket(10000);
+//   2，定义数据包，用于存储接收到数据。先定义字节数组，数据包会把数据存储到字节数组中。
+     byte[] buf = new byte[1024];
+     DatagramPacket dp = new DatagramPacket(buf,buf.length);
+//   3，通过socket服务的接收方法将收到的数据存储到数据包中。
+     ds.receive(dp);//该方法是阻塞式方法。
+//   4，通过数据包的方法获取数据包中的具体数据内容，比如ip，端口，数据等等。
+    String ip = dp.getAddress().getHostAddress();
+    int port = dp.getPort();
+    String text = new String(dp.getData(),0,dp.getLength());//将字节数组中的有效部分转成字符串。
+    System.out.println(ip+":"+port+"--"+text);
+//  5，关闭资源。
+    ds.close();
+ }
 }
 
 ```
@@ -127,12 +122,12 @@ import java.net.*;
 import java.io.*;
 //需求：客户端给服务器端发送一个数据。
 class  TcpClient{
-	public static void main(String[] args) throws Exception{
-		Socket s = new Socket("10.1.31.69",10002);
-		OutputStream out = s.getOutputStream();//获取了socket流中的输出流对象。
-		out.write("tcp演示，哥们又来了!".getBytes());
-		s.close();
-	}
+  public static void main(String[] args) throws Exception{
+  Socket s = new Socket("10.1.31.69",10002);
+  OutputStream out = s.getOutputStream();//获取了socket流中的输出流对象。
+  out.write("tcp演示，哥们又来了!".getBytes());
+  s.close();
+ }
 }
 
 ```
@@ -147,20 +142,20 @@ TCP服务端：
 ```Java
 
 class  TcpServer{
-	public static void main(String[] args) throws Exception{
-		ServerSocket ss = new ServerSocket(10002);//建立服务端的socket服务
-		Socket s = ss.accept();//获取客户端对象
-		String ip = s.getInetAddress().getHostAddress();
-		System.out.println(ip+".....connected");
-//		可以通过获取到的socket对象中的socket流和具体的客户端进行通讯。
-		InputStream in = s.getInputStream();//读取客户端的数据，使用客户端对象的socket读取流
-		byte[] buf = new byte[1024];
-		int len = in.read(buf);
-		String text = new String(buf,0,len);
-		System.out.println(text);
-//		如果通讯结束，关闭资源。注意：要先关客户端，在关服务端。
-		s.close();
-		ss.close();
-	}
+  public static void main(String[] args) throws Exception{
+  ServerSocket ss = new ServerSocket(10002);//建立服务端的socket服务
+  Socket s = ss.accept();//获取客户端对象
+  String ip = s.getInetAddress().getHostAddress();
+  System.out.println(ip+".....connected");
+  //可以通过获取到的socket对象中的socket流和具体的客户端进行通讯。
+  InputStream in = s.getInputStream();//读取客户端的数据，使用客户端对象的socket读取流
+  byte[] buf = new byte[1024];
+  int len = in.read(buf);
+  String text = new String(buf,0,len);
+  System.out.println(text);
+  //如果通讯结束，关闭资源。注意：要先关客户端，在关服务端。
+  s.close();
+  ss.close();
+ }
 }
 ```
